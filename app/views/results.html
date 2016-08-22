@@ -1,0 +1,31 @@
+<div class="search-results">
+
+    <div class="search-header">
+        <div class="container">
+            <div class="search-logo">
+                <div class="vk-logo"></div>
+            </div>
+            <div class="search-form">
+                <form action="results" ng-submit="submitForm($event)">
+                    <input type="text" class="form-control"
+                           ng-model="query"
+                           name="query"
+                           placeholder="Search query"
+                           autocomplete="off">
+                    <button type="submit" class="btn btn-primary btn-sm" ng-disabled="!isValid()">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-items">
+        <div class="container">
+            <div class="content-block" ng-repeat="item in response | filter:isValidObject">
+                <div class="content-block-body">
+                    <span class="text" ng-bind-html="formatText(item.text)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

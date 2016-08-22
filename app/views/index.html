@@ -1,0 +1,25 @@
+<div class="search-index">
+    <div class="container">
+        <div class="content-block">
+            <div class="content-block-header">
+                <h1 class="title">Angular Test - VK API</h1>
+                <div class="vk-logo pull-right"></div>
+            </div>
+            <div class="content-block-body clearfix">
+                <form action="results" ng-submit="submitForm($event)">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="query" name="query"
+                                   placeholder="Search query"
+                                   autocomplete="off">
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-primary btn-block" type="submit"
+                                    ng-disabled="!isValid()">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
