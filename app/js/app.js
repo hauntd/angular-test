@@ -3,8 +3,10 @@
 angular.module('myApp', [
     'ngRoute',
     'cgNotify',
+    'ngLodash',
     'myApp.controllers',
-    'myApp.services'
+    'myApp.services',
+    'myApp.pagination'
 ]).
 
 config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {

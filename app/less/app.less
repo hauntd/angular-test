@@ -58,5 +58,29 @@
     }
   }
   .search-items {
+    .search-item {
+      .user-photo, .user-name {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      .user-photo {
+        img {
+          display: block;
+          width: 25px;
+          height: 25px;
+          .rounded(25px);
+        }
+      }
+      .user-name {
+        font-weight: bolder;
+      }
+    }
+  }
+  .search-pagination {
+    text-align: center;
+    .pagination li a {
+      cursor: pointer;
+    }
   }
 }

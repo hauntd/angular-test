@@ -2,8 +2,7 @@
 
 var module = angular.module('myApp.controllers', []);
 
-module.controller('SearchIndexCtrl', ['$scope', '$rootScope', '$window', '$location', 'notify',
-    function ($scope, $rootScope, $window, $location) {
+module.controller('SearchIndexCtrl', function ($scope, $rootScope, $window, $location) {
         $scope.query = '';
 
         $scope.isValid = function() {
@@ -17,17 +16,28 @@ module.controller('SearchIndexCtrl', ['$scope', '$rootScope', '$window', '$locat
             $event.preventDefault();
         }
     }
-]);
+);
 
-module.controller('SearchResultsCtrl', ['$scope', '$routeParams', 'Results', '$location', '$sce',
-    function ($scope, $routeParams, Results, $location, $sce) {
+module.controller('SearchResultsCtrl', function ($scope, $routeParams, Results, $location, $sce, lodash) {
         $scope.query = $routeParams.query;
-        $scope.response = [];
+        $scope.items = [];
+        $scope.users = [];
+        $scope.numPerPage = 20;
+        $scope.noOfPages = 5;
+        $scope.currentPage = 1;
 
-        var retrieveData = function() {
-            Results.query($scope.query, function(response) {
-                console.log(response);
-                $scope.response = response;
+        var retrieveData = function(offset, count) {
+            Results.query($scope.query, offset, count, function(data) {
+                if (typeof(data) === 'object') {
+                    console.log('Data is ' + data);
+                    $scope.users = data.profiles;
+                    $scope.items = data.wall;
+                    $scope.noOfPages = $scope.items ? Math.ceil($scope.items[0] / $scope.numPerPage) : 0;
+                } else {
+                    $scope.users = [];
+                    $scope.items = [];
+                    $scope.noOfPages = 0;
+                }
                 $location.path('/results/' + $scope.query);
             });
         };
@@ -45,10 +55,24 @@ module.controller('SearchResultsCtrl', ['$scope', '$routeParams', 'Results', '$l
             return $sce.trustAsHtml(text);
         };
 
+        $scope.getUser = function(uid) {
+            console.log(lodash.find($scope.users, { uid: uid }));
+            return lodash.find($scope.users, { uid: uid });
+        };
+
+        $scope.isUser = function(uid) {
+            return uid > 0;
+        };
+
         $scope.isValidObject = function(item) {
             return typeof(item) === 'object' && item.text.length;
         };
 
-        retrieveData($scope.query);
+        $scope.setPage = function() {
+            var offset = $scope.currentPage > 1 ? ($scope.currentPage - 1) * $scope.numPerPage : 0;
+            $scope.items = retrieveData(offset, $scope.numPerPage);
+        };
+
+        $scope.$watch('currentPage', $scope.setPage);
     }
-]);
+);

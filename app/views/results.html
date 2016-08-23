@@ -20,10 +20,22 @@
 
     <div class="search-items">
         <div class="container">
-            <div class="content-block" ng-repeat="item in response | filter:isValidObject">
+            <div class="content-block search-item" ng-repeat="item in items | filter:isValidObject">
+                <div class="content-block-header" ng-hide="!isUser(item.from_id)">
+                    <span class="user-photo">
+                        <img src="{{ getUser(item.from_id).photo }}" width="25" height="25">
+                    </span>
+                    <span class="user-name">
+                        {{ getUser(item.from_id).first_name }}
+                        {{ getUser(item.from_id).last_name }}
+                    </span>
+                </div>
                 <div class="content-block-body">
                     <span class="text" ng-bind-html="formatText(item.text)"></span>
                 </div>
+            </div>
+            <div class="search-pagination">
+                <pagination num-pages="noOfPages" current-page="currentPage" class="pagination-small"></pagination>
             </div>
         </div>
     </div>
