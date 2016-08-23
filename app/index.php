@@ -9,7 +9,7 @@ $url = $config['baseUrl'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Angular Test - VK API</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="<?= $url ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $url ?>bower_components/angular-notify/angular-notify.css">
     <link rel="stylesheet" href="<?= $url ?>css/app.min.css">
