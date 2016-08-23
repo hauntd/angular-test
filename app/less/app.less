@@ -18,6 +18,12 @@
   padding-top: 240px;
 }
 
+@media (max-width: @screen-xs-max) {
+  .search-index {
+    padding-top: 40px;
+  }
+}
+
 .search-results {
   .search-header {
     background: #fff;
@@ -72,8 +78,18 @@
           .rounded(25px);
         }
       }
-      .user-name {
+      .user-name a {
         font-weight: bolder;
+        color: @foreground-default;
+      }
+      .post-text {
+        -ms-word-break: break-word;
+        word-break: break-word;
+      }
+      .post-date {
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #aaa;
       }
     }
   }

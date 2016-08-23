@@ -50,6 +50,10 @@ module.controller('SearchResultsCtrl', function ($scope, $routeParams, Results, 
             $event.preventDefault();
         };
 
+        $scope.getDate = function(ts) {
+            return (new Date(ts * 1000)).toDateString();
+        };
+
         $scope.formatText = function(text) {
             text = text.replace(/\[(id\S+)\|(.*?)\]/g, '<a href="https://vk.com/$1">$2</a>');
             return $sce.trustAsHtml(text);

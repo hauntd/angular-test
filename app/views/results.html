@@ -26,12 +26,15 @@
                         <img src="{{ getUser(item.from_id).photo }}" width="25" height="25">
                     </span>
                     <span class="user-name">
-                        {{ getUser(item.from_id).first_name }}
-                        {{ getUser(item.from_id).last_name }}
+                        <a href="https://vk.com/id{{ item.from_id }}" target="_blank">
+                            {{ getUser(item.from_id).first_name }}
+                            {{ getUser(item.from_id).last_name }}
+                        </a>
                     </span>
                 </div>
                 <div class="content-block-body">
-                    <span class="text" ng-bind-html="formatText(item.text)"></span>
+                    <div class="post-text" ng-bind-html="formatText(item.text)"></div>
+                    <div class="post-date">{{ getDate(item.date) }}</div>
                 </div>
             </div>
             <div class="search-pagination">
