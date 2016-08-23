@@ -10,7 +10,8 @@ angular.module('myApp.services', ['myApp'])
                         query: query,
                         offset: offset,
                         count: count,
-                        extended: 1
+                        extended: 1,
+                        https: 1
                     };
                     return VK.request('wall.search', params, callback);
                 }

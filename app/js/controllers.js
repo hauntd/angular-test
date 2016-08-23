@@ -29,7 +29,6 @@ module.controller('SearchResultsCtrl', function ($scope, $routeParams, Results, 
         var retrieveData = function(offset, count) {
             Results.query($scope.query, offset, count, function(data) {
                 if (typeof(data) === 'object') {
-                    console.log('Data is ' + data);
                     $scope.users = data.profiles;
                     $scope.items = data.wall;
                     $scope.noOfPages = $scope.items ? Math.ceil($scope.items[0] / $scope.numPerPage) : 0;
@@ -52,11 +51,11 @@ module.controller('SearchResultsCtrl', function ($scope, $routeParams, Results, 
         };
 
         $scope.formatText = function(text) {
+            text = text.replace(/\[(id\S+)\|(.*?)\]/g, '<a href="https://vk.com/$1">$2</a>');
             return $sce.trustAsHtml(text);
         };
 
         $scope.getUser = function(uid) {
-            console.log(lodash.find($scope.users, { uid: uid }));
             return lodash.find($scope.users, { uid: uid });
         };
 
